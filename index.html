@@ -1001,19 +1001,20 @@ body.light .check-card, body.light .compare-card, body.light .speaker-card, body
   transition: background 0.2s ease;
 }
 
-.story-progress span.is-done {
-  background: rgba(255,255,255,0.9);
-}
-
-.story-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  gap: 12px;
+.story-progress span.is-active {
+  background: rgba(255,255,255,0.95);
 }
 
 .story-info {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.16);
+}
+
+.story-user {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1022,78 +1023,114 @@ body.light .check-card, body.light .compare-card, body.light .speaker-card, body
 .story-avatar {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   color: white;
   font-weight: 900;
-}
-
-.story-avatar.satan {
-  background: linear-gradient(135deg, #420516, #ff6b35);
-}
-
-.story-avatar.crusoe {
-  background: linear-gradient(135deg, #164e3b, #f2c14e);
-}
-
-.story-info-text h3 {
-  margin: 0;
-  font-size: 0.95rem;
-}
-
-.story-info-text p {
-  margin: 2px 0 0;
-  font-size: 0.8rem;
-  opacity: 0.8;
-}
-
-.story-content {
-  flex: 1;
-  display: grid;
-  place-items: center;
-  padding: 20px;
-  text-align: center;
-}
-
-.story-action {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 0;
-  background: rgba(255,255,255,0.2);
-  color: white;
-  cursor: pointer;
-  font-size: 1.2rem;
-  display: grid;
-  place-items: center;
-}
-
-.story-bottom {
-  padding: 16px;
-  border-top: 1px solid rgba(255,255,255,0.15);
-}
-
-.story-footer {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 12px 0 0;
-}
-
-.story-footer .mini-action {
-  padding: 8px 10px;
   font-size: 0.9rem;
 }
 
-.story-footer .mini-action:first-child {
-  flex: 1;
-  text-align: left;
+.story-avatar.satan {
+  background: linear-gradient(135deg, #420516, #f97316);
 }
 
-@media (max-width: 1024px) {
+.story-avatar.crusoe {
+  background: linear-gradient(135deg, #064e3b, #facc15);
+}
+
+.story-meta {
+  font-size: 0.9rem;
+  opacity: 0.86;
+}
+
+.story-meta strong {
+  display: block;
+}
+
+.story-body {
+  padding: 28px 20px;
+  min-height: 280px;
+}
+
+.story-quote {
+  font-size: 1.3rem;
+  line-height: 1.45;
+  font-weight: 700;
+  margin: 0 0 14px;
+}
+
+.story-quote-author {
+  display: block;
+  margin-top: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  opacity: 0.92;
+}
+
+.story-actions {
+  display: flex;
+  gap: 8px;
+  padding: 16px;
+  border-top: 1px solid rgba(255,255,255,0.16);
+}
+
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 999px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.icon-btn:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.icon-btn.is-liked {
+  background: rgba(255, 107, 138, 0.22);
+  color: #ff9fb1;
+  border-color: rgba(255, 107, 138, 0.4);
+}
+
+.dark-mode-only {
+  display: block;
+}
+
+body.light .dark-mode-only {
+  display: none;
+}
+
+.light-mode-only {
+  display: none;
+}
+
+body.light .light-mode-only {
+  display: block;
+}
+
+@media (max-width: 768px) {
   .hero {
     grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .hero-card {
+    min-height: 360px;
+  }
+
+  .phone-preview {
+    width: min(320px, 100%);
+    height: 480px;
+    transform: rotate(0deg);
   }
 
   .checklist-grid {
@@ -1104,11 +1141,15 @@ body.light .check-card, body.light .compare-card, body.light .speaker-card, body
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .compare-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .speaker-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .compare-grid {
+  .themes-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1117,12 +1158,52 @@ body.light .check-card, body.light .compare-card, body.light .speaker-card, body
   }
 
   .modal-visual {
-    min-height: 400px;
+    min-height: 420px;
+  }
+
+  .profile-main-row {
+    grid-template-columns: 100px 1fr;
+    gap: 16px;
+  }
+
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+    font-size: 2.4rem;
+  }
+
+  .speaker-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 768px) {
-  .checklist-grid, .trends-grid {
+@media (max-width: 480px) {
+  .topbar {
+    padding: 12px 16px;
+  }
+
+  .brand {
+    font-size: 1rem;
+  }
+
+  .brand-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+
+  .checklist-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trends-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .compare-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1130,40 +1211,54 @@ body.light .check-card, body.light .compare-card, body.light .speaker-card, body
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .profile-main-row {
-    grid-template-columns: 1fr;
-    gap: 16px;
+  .post-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .themes-grid {
-    grid-template-columns: 1fr;
+  .phone-preview {
+    width: min(280px, 100%);
+    height: 420px;
+    padding: 16px;
+  }
+
+  .notification-card {
+    width: min(280px, 92%);
+  }
+
+  .modal-card {
+    width: calc(100% - 20px);
+    max-height: 95vh;
   }
 }
   </style>
 </head>
-<body>
+<body class="dark">
   <div class="background-glow glow-one"></div>
   <div class="background-glow glow-two"></div>
 
-  <div class="topbar">
-    <a href="#" class="brand">
+  <nav class="topbar">
+    <a href="index.html" class="brand">
       <span class="brand-icon">📚</span>
-      <span>InstaLit</span>
+      InstaLit
     </a>
     <div class="nav-actions">
+      <button class="nav-btn is-active">Home</button>
+      <button class="nav-btn">Explore</button>
       <button class="theme-btn" id="themeToggle">🌙</button>
     </div>
-  </div>
+  </nav>
 
-  <div class="view">
+  <section class="view">
     <div class="hero">
       <div>
-        <p class="eyebrow">✨ Literary Analysis</p>
-        <h1>Paradise Lost meets<br/>Robinson Crusoe</h1>
-        <p class="hero-text">Explore the epic tales of fallen angels and island survival through an Instagram-inspired interface. A unique way to discover literary comparisons, themes, and character analyses.</p>
+        <div class="eyebrow">Welcome to InstaLit</div>
+        <h1>Paradise Lost × Robinson Crusoe</h1>
+        <p class="hero-text">
+          Discover the literary world through two epic journeys: Satan's rebellion in Paradise and Crusoe's survival on a deserted island.
+        </p>
         <div class="hero-actions">
-          <button class="primary-btn">Explore Stories</button>
-          <button class="secondary-btn">Learn More</button>
+          <button class="primary-btn" onclick="document.querySelector('[data-section=paradise]').scrollIntoView()">Explore Satan</button>
+          <button class="secondary-btn" onclick="document.querySelector('[data-section=crusoe]').scrollIntoView()">Explore Crusoe</button>
         </div>
       </div>
       <div class="hero-card">
@@ -1171,14 +1266,14 @@ body.light .check-card, body.light .compare-card, body.light .speaker-card, body
           <div class="phone-notch"></div>
           <div class="preview-appbar">
             <span class="camera-dot"></span>
-            <span>InstaLit</span>
-            <span>•••</span>
+            <strong style="flex:1;text-align:center">InstaLit</strong>
+            <span>...</span>
           </div>
           <div class="preview-profile">
-            <div class="preview-avatar"></div>
+            <div class="preview-avatar">📖</div>
             <div>
-              <strong>Literature Feed</strong>
-              <p>Curated Classics</p>
+              <strong>InstaLit</strong>
+              <p>Literature in every story</p>
             </div>
           </div>
           <div class="preview-grid">
@@ -1193,420 +1288,534 @@ body.light .check-card, body.light .compare-card, body.light .speaker-card, body
         <div class="notification-card top-card">
           <div class="mini-avatar satan-mini">😈</div>
           <div>
-            <strong>Satan Appeared</strong>
-            <p>Paradise Lost Chapter 1</p>
+            <strong>Satan</strong>
+            <p>Just posted about rebellion</p>
           </div>
         </div>
         <div class="notification-card bottom-card">
-          <div class="mini-avatar crusoe-mini">🏝️</div>
+          <div class="mini-avatar crusoe-mini">⛵</div>
           <div>
-            <strong>Island Discovery</strong>
-            <p>Robinson Crusoe Chapter 3</p>
+            <strong>Crusoe</strong>
+            <p>New chapter: Survival tips</p>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="view" style="padding-top: 0;">
-    <div class="section-panel wide-panel">
-      <div class="section-heading">
-        <p class="eyebrow">📖 Features</p>
-        <h2>What Makes InstaLit Special</h2>
-      </div>
-      <div class="checklist-grid">
-        <div class="check-card">
-          <span>✓</span>
-          <h3>Character Profiles</h3>
-          <p>Detailed character analyses from both epic narratives with Instagram-style cards.</p>
-        </div>
-        <div class="check-card">
-          <span>✓</span>
-          <h3>Theme Comparison</h3>
-          <p>Compare themes like morality, survival, and redemption across both works.</p>
-        </div>
-        <div class="check-card">
-          <span>✓</span>
-          <h3>Interactive Stories</h3>
-          <p>Explore key chapters and moments in an engaging, visual format.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="view">
+  <section class="view" data-section="paradise">
     <div class="section-heading">
-      <p class="eyebrow">👥 Main Characters</p>
-      <h2>Meet the Cast</h2>
+      <div class="eyebrow">Book One</div>
+      <h2>Satan's Journey</h2>
+      <p class="section-intro">Follow the most complex antagonist in English literature as he schemes to corrupt humanity. A tale of pride, power, and the cost of defiance.</p>
     </div>
 
-    <div class="phone-shell">
-      <div class="phone-top">
-        <span class="signal-bars"><i></i><i></i><i></i></span>
-        <span>9:41</span>
-        <span>📡</span>
-      </div>
-      <div class="profile-appbar">
-        <span class="phone-title">Satan</span>
-        <span>•••</span>
-      </div>
-      <div class="profile-header">
-        <div class="profile-main-row">
-          <div class="profile-avatar satan">
-            😈
-            <small>✓</small>
+    <div class="section-panel wide-panel" style="margin-top:32px">
+      <div class="phone-shell">
+        <div class="phone-top">
+          <div class="signal-bars">
+            <i></i><i></i><i></i>
           </div>
-          <div class="profile-info-top">
-            <h2>Satan</h2>
-            <button class="follow-btn">Follow</button>
+          <span style="flex:1;text-align:center;font-weight:900">9:41</span>
+          <span>📶</span>
+        </div>
+        <div class="profile-appbar">
+          <button class="icon-btn">←</button>
+          <span class="phone-title">Satan</span>
+          <button class="icon-btn">⋯</button>
+        </div>
+        <div class="profile-header">
+          <div class="profile-main-row">
+            <div class="profile-avatar satan">😈</div>
+            <div>
+              <div class="profile-info-top">
+                <h2>Satan</h2>
+                <button class="follow-btn">Follow</button>
+              </div>
+              <div class="stats-row">
+                <div><strong>1.2M</strong> <span>Posts</span></div>
+                <div><strong>3.5M</strong> <span>Followers</span></div>
+                <div><strong>284</strong> <span>Following</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="bio-block">
+            <strong>The Chief Rebel</strong><br>
+            "Better to reign in Hell than serve in Heaven" – Paradise Lost, Book 1, Line 263
+            <div class="hashtag-line">
+              <span class="hashtag">🔥 Rebellion</span>
+              <span class="hashtag">⚫ Chaos</span>
+            </div>
           </div>
         </div>
-        <div class="stats-row">
-          <div><strong>1.2M</strong><span> Followers</span></div>
-          <div><strong>847</strong><span> Posts</span></div>
-          <div><strong>2.3M</strong><span> Likes</span></div>
+        <div class="story-rail">
+          <button class="story-bubble">
+            <div class="story-ring">
+              <div class="story-inner">📖</div>
+            </div>
+            <span>Book I</span>
+          </button>
+          <button class="story-bubble">
+            <div class="story-ring">
+              <div class="story-inner">⚔️</div>
+            </div>
+            <span>War</span>
+          </button>
+          <button class="story-bubble">
+            <div class="story-ring">
+              <div class="story-inner">🌍</div>
+            </div>
+            <span>Earth</span>
+          </button>
+          <button class="story-bubble">
+            <div class="story-ring">
+              <div class="story-inner">🍎</div>
+            </div>
+            <span>Tempt</span>
+          </button>
+          <button class="story-bubble">
+            <div class="story-ring">
+              <div class="story-inner">💭</div>
+            </div>
+            <span>Soliloquy</span>
+          </button>
         </div>
-        <div class="bio-block">
-          <strong>The Fallen Archangel</strong><br/>
-          From Heaven to Hell. Epic antagonist in Paradise Lost. Strategic, ambitious, and relentlessly determined. 🔥
-          <div class="hashtag-line">
-            <span class="hashtag">#ParadiseLost</span>
-            <span class="hashtag">#Antagonist</span>
-            <span class="hashtag">#Epic</span>
-          </div>
+        <div class="profile-tabs">
+          <button class="tab-btn is-active">Posts</button>
+          <button class="tab-btn">Themes</button>
+          <button class="tab-btn">Quotes</button>
         </div>
-      </div>
-
-      <div class="story-rail">
-        <button class="story-bubble">
-          <div class="story-ring">
-            <div class="story-inner">😈</div>
-          </div>
-          <span>Hell</span>
-        </button>
-        <button class="story-bubble">
-          <div class="story-ring">
-            <div class="story-inner">⚔️</div>
-          </div>
-          <span>War</span>
-        </button>
-        <button class="story-bubble">
-          <div class="story-ring">
-            <div class="story-inner">🎯</div>
-          </div>
-          <span>Plans</span>
-        </button>
-      </div>
-
-      <div class="profile-tabs">
-        <button class="tab-btn is-active">Posts</button>
-        <button class="tab-btn">Reels</button>
-        <button class="tab-btn">Tagged</button>
-      </div>
-
-      <div class="profile-content">
-        <div class="post-grid">
-          <button class="post-card" onclick="openModal('satan', 1)">
-            <div class="post-visual satan">
-              <div class="visual-content">
-                <span class="visual-icon">😈</span>
-                <span class="visual-title">The Fall</span>
-                <span class="visual-subtitle">Book 1</span>
+        <div class="profile-content">
+          <div class="post-grid">
+            <button class="post-card" onclick="document.querySelector('.modal').classList.remove('is-hidden')">
+              <div class="post-visual satan">
+                <div class="visual-content">
+                  <span class="visual-icon">⚔️</span>
+                  <span class="visual-title">Rebellion</span>
+                  <span class="visual-subtitle">Angelic Civil War</span>
+                </div>
               </div>
-              <div class="post-overlay">❤️</div>
-            </div>
-          </button>
-          <button class="post-card" onclick="openModal('satan', 2)">
-            <div class="post-visual satan">
-              <div class="visual-content">
-                <span class="visual-icon">⚔️</span>
-                <span class="visual-title">War in Heaven</span>
-                <span class="visual-subtitle">Book 6</span>
+              <div class="post-overlay">👁️ View</div>
+            </button>
+            <button class="post-card">
+              <div class="post-visual satan">
+                <div class="visual-content">
+                  <span class="visual-icon">🌍</span>
+                  <span class="visual-title">Earth</span>
+                  <span class="visual-subtitle">Corrupting Humanity</span>
+                </div>
               </div>
-              <div class="post-overlay">❤️</div>
-            </div>
-          </button>
-          <button class="post-card" onclick="openModal('satan', 3)">
-            <div class="post-visual satan">
-              <div class="visual-content">
-                <span class="visual-icon">🎯</span>
-                <span class="visual-title">Temptation</span>
-                <span class="visual-subtitle">Book 9</span>
+              <div class="post-overlay">👁️ View</div>
+            </button>
+            <button class="post-card">
+              <div class="post-visual satan">
+                <div class="visual-content">
+                  <span class="visual-icon">💭</span>
+                  <span class="visual-title">Soliloquy</span>
+                  <span class="visual-subtitle">Book 4, Mount Niphates</span>
+                </div>
               </div>
-              <div class="post-overlay">❤️</div>
-            </div>
-          </button>
+              <div class="post-overlay">👁️ View</div>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="view">
+  <section class="view" style="margin-top:80px">
     <div class="section-heading">
-      <p class="eyebrow">🏝️ Island Survivor</p>
-      <h2>Robinson Crusoe</h2>
+      <div class="eyebrow">Satan's Arc</div>
+      <h2>Key Themes & Analysis</h2>
     </div>
 
-    <div class="phone-shell">
-      <div class="phone-top">
-        <span class="signal-bars"><i></i><i></i><i></i></span>
-        <span>9:41</span>
-        <span>📡</span>
+    <div class="checklist-grid" style="margin-top:32px">
+      <div class="check-card">
+        <span>1</span>
+        <h3>Ambition & Pride</h3>
+        <p>Satan's fall stems from his refusal to accept God's authority—a cautionary tale about unchecked ambition.</p>
       </div>
-      <div class="profile-appbar">
-        <span class="phone-title">Robinson Crusoe</span>
-        <span>•••</span>
+      <div class="check-card">
+        <span>2</span>
+        <h3>Corruption of Innocence</h3>
+        <p>His manipulation of Adam and Eve shows the power of persuasion and the vulnerability of newly-created beings.</p>
       </div>
-      <div class="profile-header">
-        <div class="profile-main-row">
-          <div class="profile-avatar crusoe">
-            🏝️
-            <small>✓</small>
+      <div class="check-card">
+        <span>3</span>
+        <h3>Anti-Hero Complexity</h3>
+        <p>Milton's Satan is sympathetic, intelligent, and tragic—making him one of literature's greatest antagonists.</p>
+      </div>
+    </div>
+
+    <div class="compare-grid" style="margin-top:46px">
+      <div class="compare-card satan-side">
+        <h3>Satan's Domain</h3>
+        <ul style="color:var(--muted);line-height:1.7;margin:14px 0">
+          <li>Hell & The Void</li>
+          <li>Deception & Manipulation</li>
+          <li>Cosmic Rebellion</li>
+          <li>Intellectual Cunning</li>
+        </ul>
+      </div>
+      <div class="compare-card shared-side">
+        <h3>Overlaps</h3>
+        <ul style="color:var(--muted);line-height:1.7;margin:14px 0">
+          <li>Isolation & Solitude</li>
+          <li>Survival Against Odds</li>
+          <li>Journey & Discovery</li>
+          <li>Psychological Depth</li>
+        </ul>
+      </div>
+      <div class="compare-card crusoe-side">
+        <h3>Crusoe's Domain</h3>
+        <ul style="color:var(--muted);line-height:1.7;margin:14px 0">
+          <li>Desert Island</li>
+          <li>Ingenuity & Labor</li>
+          <li>Personal Redemption</li>
+          <li>Practical Wisdom</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trends-grid" style="margin-top:46px">
+      <div class="trend-card">
+        <div class="trend-label">🎭 Characterization</div>
+        <h3>The Tragic Anti-Hero</h3>
+        <p>Satan commands sympathy despite his evil intentions. His eloquence and suffering create an internal conflict that fascinates readers to this day.</p>
+      </div>
+      <div class="trend-card">
+        <div class="trend-label">📖 Literary Impact</div>
+        <h3>Redefining Evil</h3>
+        <p>Paradise Lost redefined evil in literature. Satan became the template for the complex villain—powerful, intelligent, yet fundamentally flawed.</p>
+      </div>
+      <div class="trend-card">
+        <div class="trend-label">🌍 Modern Relevance</div>
+        <h3>Power & Corruption</h3>
+        <p>Satan's descent into tyranny mirrors modern cautionary tales about authoritarian control and the seductive nature of absolute power.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" data-section="crusoe" style="margin-top:80px">
+    <div class="section-heading">
+      <div class="eyebrow">Book Two</div>
+      <h2>Crusoe's Journey</h2>
+      <p class="section-intro">Stranded on an uncharted island, Robinson Crusoe endures isolation, builds civilization from nothing, and discovers faith. A tale of resilience, ingenuity, and redemption.</p>
+    </div>
+
+    <div class="section-panel wide-panel" style="margin-top:32px">
+      <div class="phone-shell">
+        <div class="phone-top">
+          <div class="signal-bars">
+            <i></i><i></i><i></i>
           </div>
-          <div class="profile-info-top">
-            <h2>Robinson Crusoe</h2>
-            <button class="follow-btn">Follow</button>
+          <span style="flex:1;text-align:center;font-weight:900">2:18</span>
+          <span>📶</span>
+        </div>
+        <div class="profile-appbar">
+          <button class="icon-btn">←</button>
+          <span class="phone-title">Crusoe</span>
+          <button class="icon-btn">⋯</button>
+        </div>
+        <div class="profile-header">
+          <div class="profile-main-row">
+            <div class="profile-avatar crusoe">⛵</div>
+            <div>
+              <div class="profile-info-top">
+                <h2>Crusoe</h2>
+                <button class="follow-btn">Follow</button>
+              </div>
+              <div class="stats-row">
+                <div><strong>856K</strong> <span>Posts</span></div>
+                <div><strong>2.1M</strong> <span>Followers</span></div>
+                <div><strong>142</strong> <span>Following</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="bio-block">
+            <strong>The Castaway Survivor</strong><br>
+            "I am not now that which I have been" – Robinson Crusoe, Chapter 5
+            <div class="hashtag-line">
+              <span class="hashtag">🏝️ Survival</span>
+              <span class="hashtag">✝️ Faith</span>
+            </div>
           </div>
         </div>
-        <div class="stats-row">
-          <div><strong>856K</strong><span> Followers</span></div>
-          <div><strong>234</strong><span> Posts</span></div>
-          <div><strong>1.1M</strong><span> Likes</span></div>
+        <div class="story-rail">
+          <button class="story-bubble">
+            <div class="story-ring">
+              <div class="story-inner">⛵</div>
+            </div>
+            <span>Shipwreck</span>
+          </button>
+          <button class="story-bubble">
+            <div class="story-ring">
+              <div class="story-inner">🏠</div>
+            </div>
+            <span>Home</span>
+          </button>
+          <button class="story-bubble">
+            <div class="story-ring">
+              <div class="story-inner">👥</div>
+            </div>
+            <span>Friday</span>
+          </button>
+          <button class="story-bubble">
+            <div class="story-ring">
+              <div class="story-inner">📿</div>
+            </div>
+            <span>Faith</span>
+          </button>
+          <button class="story-bubble">
+            <div class="story-ring">
+              <div class="story-inner">🌅</div>
+            </div>
+            <span>Renewal</span>
+          </button>
         </div>
-        <div class="bio-block">
-          <strong>The Island Survivor</strong><br/>
-          Shipwrecked explorer learning to survive and thrive in isolation. Self-reliant, resourceful, and spiritually awakened. 🌴
-          <div class="hashtag-line">
-            <span class="hashtag">#RobinsonCrusoe</span>
-            <span class="hashtag">#Survival</span>
-            <span class="hashtag">#Adventure</span>
-          </div>
+        <div class="profile-tabs">
+          <button class="tab-btn is-active">Posts</button>
+          <button class="tab-btn">Themes</button>
+          <button class="tab-btn">Survival</button>
         </div>
-      </div>
-
-      <div class="story-rail">
-        <button class="story-bubble">
-          <div class="story-ring">
-            <div class="story-inner">⛵</div>
-          </div>
-          <span>Shipwreck</span>
-        </button>
-        <button class="story-bubble">
-          <div class="story-ring">
-            <div class="story-inner">🛠️</div>
-          </div>
-          <span>Building</span>
-        </button>
-        <button class="story-bubble">
-          <div class="story-ring">
-            <div class="story-inner">👥</div>
-          </div>
-          <span>Friday</span>
-        </button>
-      </div>
-
-      <div class="profile-tabs">
-        <button class="tab-btn is-active">Posts</button>
-        <button class="tab-btn">Reels</button>
-        <button class="tab-btn">Tagged</button>
-      </div>
-
-      <div class="profile-content">
-        <div class="post-grid">
-          <button class="post-card" onclick="openModal('crusoe', 1)">
-            <div class="post-visual crusoe">
-              <div class="visual-content">
-                <span class="visual-icon">⛵</span>
-                <span class="visual-title">The Wreck</span>
-                <span class="visual-subtitle">Day 1</span>
+        <div class="profile-content">
+          <div class="post-grid">
+            <button class="post-card">
+              <div class="post-visual crusoe">
+                <div class="visual-content">
+                  <span class="visual-icon">⛵</span>
+                  <span class="visual-title">Shipwreck</span>
+                  <span class="visual-subtitle">The Beginning</span>
+                </div>
               </div>
-              <div class="post-overlay">❤️</div>
-            </div>
-          </button>
-          <button class="post-card" onclick="openModal('crusoe', 2)">
-            <div class="post-visual crusoe">
-              <div class="visual-content">
-                <span class="visual-icon">🛠️</span>
-                <span class="visual-title">Survival Craft</span>
-                <span class="visual-subtitle">Week 1</span>
+              <div class="post-overlay">👁️ View</div>
+            </button>
+            <button class="post-card">
+              <div class="post-visual crusoe">
+                <div class="visual-content">
+                  <span class="visual-icon">🏠</span>
+                  <span class="visual-title">Building</span>
+                  <span class="visual-subtitle">Creating Shelter</span>
+                </div>
               </div>
-              <div class="post-overlay">❤️</div>
-            </div>
-          </button>
-          <button class="post-card" onclick="openModal('crusoe', 3)">
-            <div class="post-visual crusoe">
-              <div class="visual-content">
-                <span class="visual-icon">👥</span>
-                <span class="visual-title">New Friends</span>
-                <span class="visual-subtitle">Year 24</span>
+              <div class="post-overlay">👁️ View</div>
+            </button>
+            <button class="post-card">
+              <div class="post-visual crusoe">
+                <div class="visual-content">
+                  <span class="visual-icon">👥</span>
+                  <span class="visual-title">Friday</span>
+                  <span class="visual-subtitle">Finding Companionship</span>
+                </div>
               </div>
-              <div class="post-overlay">❤️</div>
-            </div>
-          </button>
+              <div class="post-overlay">👁️ View</div>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="view">
-    <div class="section-panel wide-panel">
-      <div class="section-heading">
-        <p class="eyebrow">🔄 Thematic Comparison</p>
-        <h2>Paradise Lost vs Robinson Crusoe</h2>
-      </div>
-      <div class="compare-grid">
-        <div class="compare-card satan-side">
-          <h3>Paradise Lost</h3>
-          <p><strong>Themes:</strong> Pride, rebellion, redemption through suffering</p>
-          <p><strong>Setting:</strong> Heaven, Hell, Garden of Eden</p>
-          <p><strong>Conflict:</strong> Cosmic war between good and evil</p>
-        </div>
-        <div class="compare-card shared-side">
-          <h3>Similarities</h3>
-          <p><strong>Both:</strong> Journeys of transformation</p>
-          <p><strong>Both:</strong> Struggle against overwhelming odds</p>
-          <p><strong>Both:</strong> Spiritual awakening and growth</p>
-        </div>
-        <div class="compare-card crusoe-side">
-          <h3>Robinson Crusoe</h3>
-          <p><strong>Themes:</strong> Self-reliance, survival, faith</p>
-          <p><strong>Setting:</strong> Island in the Atlantic</p>
-          <p><strong>Conflict:</strong> Man vs nature vs self</p>
-        </div>
-      </div>
+  <section class="view" style="margin-top:80px">
+    <div class="section-heading">
+      <div class="eyebrow">Crusoe's Arc</div>
+      <h2>Themes of Resilience & Discovery</h2>
+    </div>
 
-      <div class="tips-card">
-        <h3>🎓 Key Insights</h3>
-        <p><strong>Paradise Lost</strong> explores the consequences of ambition and the nature of free will through Satan's rebellion, while <strong>Robinson Crusoe</strong> examines human resilience and the power of individual determination. Both works celebrate the human (or angelic) spirit while exploring profound questions about morality, purpose, and existence.</p>
+    <div class="checklist-grid" style="margin-top:32px">
+      <div class="check-card">
+        <span>1</span>
+        <h3>Self-Reliance</h3>
+        <p>Crusoe's ability to survive and thrive through practical skills and mental resilience makes him a symbol of human ingenuity and determination.</p>
+      </div>
+      <div class="check-card">
+        <span>2</span>
+        <h3>Spiritual Awakening</h3>
+        <p>Isolation leads Crusoe to faith. His journey is as much spiritual as it is physical—finding meaning in solitude and suffering.</p>
+      </div>
+      <div class="check-card">
+        <span>3</span>
+        <h3>Companionship & Humanity</h3>
+        <p>The arrival of Friday transforms Crusoe. His capacity for compassion and teaching shows human connection transcends difference.</p>
       </div>
     </div>
-  </div>
 
-  <div id="satanModal" class="modal is-hidden">
-    <div class="modal-backdrop" onclick="closeModal()"></div>
+    <div class="themes-grid" style="margin-top:46px">
+      <div class="theme-card">
+        <div class="theme-pill">⏰ Time & Survival</div>
+        <h3>The Long Wait</h3>
+        <p>Crusoe's 28 years on the island test his psychological endurance. Time becomes both enemy and ally as he learns patience and acceptance of fate.</p>
+      </div>
+      <div class="theme-card">
+        <div class="theme-pill">🔧 Labor & Civilization</div>
+        <h3>Building From Nothing</h3>
+        <p>Crusoe creates tools, furniture, bread, and shelter. His labor represents humanity's capacity to impose order and meaning on chaos.</p>
+      </div>
+    </div>
+
+    <div class="speaker-grid" style="margin-top:46px">
+      <div class="speaker-card">
+        <div class="time">01:15</div>
+        <h3>Survival Skills</h3>
+        <div class="quote">"I throw myself upon Providence"</div>
+        <div class="quote-author">— Crusoe's Philosophy</div>
+      </div>
+      <div class="speaker-card">
+        <div class="time">02:42</div>
+        <h3>Faith & Doubt</h3>
+        <div class="quote">"Fear is the foundation of faith"</div>
+        <div class="quote-author">— Crusoe's Awakening</div>
+      </div>
+      <div class="speaker-card">
+        <div class="time">04:08</div>
+        <h3>Companionship</h3>
+        <div class="quote">"I was now very far from being alone"</div>
+        <div class="quote-author">— After Meeting Friday</div>
+      </div>
+      <div class="speaker-card">
+        <div class="time">05:33</div>
+        <h3>Redemption</h3>
+        <div class="quote">"I began to see the world in a new light"</div>
+        <div class="quote-author">— Crusoe's Transformation</div>
+      </div>
+      <div class="speaker-card">
+        <div class="time">06:51</div>
+        <h3>Return</h3>
+        <div class="quote">"A man who has never been wretched can never fully appreciate joy"</div>
+        <div class="quote-author">— Final Wisdom</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" style="margin-top:80px;margin-bottom:80px">
+    <div class="section-heading">
+      <div class="eyebrow">The Comparison</div>
+      <h2>Satan vs. Crusoe</h2>
+      <p class="section-intro">Two journeys, two destinations. One descends into darkness; the other rises toward redemption. Both remain eternally compelling.</p>
+    </div>
+
+    <div class="compare-grid" style="margin-top:46px">
+      <div class="compare-card satan-side">
+        <h3>Satan's Path</h3>
+        <ul style="color:var(--muted);line-height:1.8;margin:16px 0">
+          <li><strong>Goal:</strong> Cosmic dominion</li>
+          <li><strong>Method:</strong> Seduction & war</li>
+          <li><strong>End:</strong> Eternal defeat</li>
+          <li><strong>Lesson:</strong> Pride destroys</li>
+        </ul>
+      </div>
+      <div class="compare-card shared-side">
+        <h3>Universal Themes</h3>
+        <ul style="color:var(--muted);line-height:1.8;margin:16px 0">
+          <li><strong>Isolation:</strong> Physical & mental</li>
+          <li><strong>Power:</strong> How we use it</li>
+          <li><strong>Choice:</strong> Free will matters</li>
+          <li><strong>Identity:</strong> Becoming ourselves</li>
+        </ul>
+      </div>
+      <div class="compare-card crusoe-side">
+        <h3>Crusoe's Path</h3>
+        <ul style="color:var(--muted);line-height:1.8;margin:16px 0">
+          <li><strong>Goal:</strong> Survival & redemption</li>
+          <li><strong>Method:</strong> Labor & faith</li>
+          <li><strong>End:</strong> Spiritual rebirth</li>
+          <li><strong>Lesson:</strong> Humility saves</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:60px;padding:32px;border-radius:var(--radius-lg);background:rgba(255,209,102,0.1);border:1px solid rgba(255,209,102,0.24)">
+      <h3 style="margin-top:0;color:var(--accent-two)">Why These Stories Endure</h3>
+      <p style="line-height:1.8;color:var(--muted)">
+        Paradise Lost and Robinson Crusoe represent two poles of human experience: rebellion and submission, chaos and order, damnation and redemption. 
+        Whether we identify with Satan's defiant intellect or Crusoe's humble resilience, both characters explore what it means to be human. 
+        Centuries later, their struggles remain our struggles—the eternal questions of purpose, morality, and transformation.
+      </p>
+    </div>
+  </section>
+
+  <div class="modal is-hidden">
+    <div class="modal-backdrop" onclick="this.parentElement.classList.add('is-hidden')"></div>
     <div class="modal-card">
-      <div class="modal-visual satan"></div>
+      <div class="post-visual satan">
+        <div class="visual-content">
+          <span class="visual-icon">⚔️</span>
+          <span class="visual-title">Rebellion</span>
+          <span class="visual-subtitle">Angelic Civil War</span>
+        </div>
+      </div>
       <div class="modal-content">
         <div class="modal-header">
           <div class="modal-user">
             <div class="tiny-avatar satan">😈</div>
             <div>
               <strong>Satan</strong>
-              <p style="margin: 0; color: var(--muted); font-size: 0.8rem;">Paradise Lost</p>
+              <div style="font-size:0.9rem;color:var(--muted)">Chief Rebel • 2 hours ago</div>
             </div>
           </div>
-          <button class="close-btn" onclick="closeModal()">✕</button>
+          <button class="close-btn" onclick="this.closest('.modal').classList.add('is-hidden')">✕</button>
         </div>
         <div class="caption-block">
-          <p class="caption-text" id="satanCaption"></p>
+          <p class="caption-text">
+            The angelic rebellion against God's authority. Satan leads a coalition of rebel angels against the divine order, resulting in a cosmic war that will shape all of creation. His eloquence and conviction inspire armies, even as his pride ensures his inevitable downfall.
+          </p>
           <div class="reference-box">
-            <strong>📚 Reference:</strong> <span id="satanRef"></span>
+            <strong>Key Quote:</strong> "Better to reign in Hell than serve in Heaven" (Book 1, Line 263)
           </div>
-          <div class="comment-list">
-            <div class="comment"><strong>Scholar1:</strong> Excellent analysis of the fallen angel archetype.</div>
-            <div class="comment"><strong>Reader42:</strong> The way Milton portrays Satan's complexity is remarkable.</div>
-            <div class="comment"><strong>LitProf:</strong> This post captures the essence of the first book perfectly.</div>
+          <p style="color:var(--muted);font-size:0.9rem">This rebellion sets in motion Satan's journey to corrupt humanity through the temptation of Adam and Eve.</p>
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--line)">
+            <strong style="color:var(--accent-two)">Literary Analysis:</strong>
+            <p style="color:var(--muted);line-height:1.7">
+              Milton's portrayal makes Satan sympathetic—his eloquence rivals God's authority, his defiance resonates with readers, and his suffering in exile creates tragic depth. This complexity elevated Satan from mere evil to a fully realized character, revolutionizing how literature portrays antagonists.
+            </p>
+          </div>
+        </div>
+        <div class="comment-list">
+          <div class="comment">
+            <strong>Reader_1:</strong> "The most well-written villain in all of literature"
+          </div>
+          <div class="comment">
+            <strong>LitMajor:</strong> "Satan's eloquence is almost persuasive—that's the point"
+          </div>
+          <div class="comment">
+            <strong>ClassicJunkie:</strong> "His speeches define the entire work"
           </div>
         </div>
         <div class="modal-actions">
-          <button class="mini-action">♥️ 234K</button>
-          <button class="mini-action">💬 1.2K</button>
-          <button class="mini-action">↗️</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="crusoeModal" class="modal is-hidden">
-    <div class="modal-backdrop" onclick="closeModal()"></div>
-    <div class="modal-card">
-      <div class="modal-visual crusoe"></div>
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="modal-user">
-            <div class="tiny-avatar crusoe">🏝️</div>
-            <div>
-              <strong>Robinson Crusoe</strong>
-              <p style="margin: 0; color: var(--muted); font-size: 0.8rem;">Island Survivor</p>
-            </div>
-          </div>
-          <button class="close-btn" onclick="closeModal()">✕</button>
-        </div>
-        <div class="caption-block">
-          <p class="caption-text" id="crusoeCaption"></p>
-          <div class="reference-box">
-            <strong>📚 Reference:</strong> <span id="crusoeRef"></span>
-          </div>
-          <div class="comment-list">
-            <div class="comment"><strong>AdventureSeeker:</strong> The survival details are incredibly inspiring.</div>
-            <div class="comment"><strong>ClassicReader:</strong> Crusoe's resilience is timeless.</div>
-            <div class="comment"><strong>StoryLover:</strong> This captures the spirit of human determination.</div>
-          </div>
-        </div>
-        <div class="modal-actions">
-          <button class="mini-action">♥️ 156K</button>
-          <button class="mini-action">💬 892</button>
-          <button class="mini-action">↗️</button>
+          <button class="mini-action">❤️ Like</button>
+          <button class="mini-action">💬 Comment</button>
+          <button class="mini-action">🔗 Share</button>
+          <button class="mini-action">📌 Save</button>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-const satanContent = {
-  1: {
-    caption: "The moment everything changed. Satan's fall from grace marks the beginning of the greatest conflict in Paradise Lost. Milton portrays this moment with such grandeur and tragedy that we cannot help but empathize with the fallen angel.",
-    ref: "Paradise Lost, Book 1, Lines 1-26"
-  },
-  2: {
-    caption: "War erupts in Heaven! The cosmic battle between Heaven's forces and Satan's rebel army is one of the most epic sequences in literature. The clash of titanic beings shapes the fate of creation itself.",
-    ref: "Paradise Lost, Book 6"
-  },
-  3: {
-    caption: "Satan's greatest temptation comes in the form of Eve. Using cunning and persuasion, he succeeds where force could not. This moment brings about humanity's fall and sets the stage for redemption.",
-    ref: "Paradise Lost, Book 9, Lines 532-732"
-  }
-};
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
 
-const crusoeContent = {
-  1: {
-    caption: "Adrift at sea, the ship goes down in a terrible storm. Crusoe barely escapes with his life, finding himself alone on an unknown island. This moment of desperation becomes the foundation of his extraordinary journey of survival and self-discovery.",
-    ref: "Robinson Crusoe, Part I, Chapters 4-5"
-  },
-  2: {
-    caption: "Building a life from nothing. With salvaged materials from the wreck, Crusoe constructs shelter, tools, and gradually establishes order in his island domain. His resourcefulness and determination showcase the power of human ingenuity.",
-    ref: "Robinson Crusoe, Part I, Chapters 6-7"
-  },
-  3: {
-    caption: "After 24 years of solitude, Crusoe finds companionship with Friday. This relationship transforms Crusoe's existence, giving him purpose beyond mere survival and introducing elements of civilization and friendship to his island home.",
-    ref: "Robinson Crusoe, Part II, Chapters 1-3"
-  }
-};
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    body.classList.add(savedTheme);
+    themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
 
-function openModal(character, postNum) {
-  const modalId = character === 'satan' ? 'satanModal' : 'crusoeModal';
-  const modal = document.getElementById(modalId);
-  const content = character === 'satan' ? satanContent[postNum] : crusoeContent[postNum];
-  
-  document.getElementById(character === 'satan' ? 'satanCaption' : 'crusoeCaption').textContent = content.caption;
-  document.getElementById(character === 'satan' ? 'satanRef' : 'crusoeRef').textContent = content.ref;
-  
-  modal.classList.remove('is-hidden');
-}
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = body.classList.contains('dark') ? 'dark' : 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      body.classList.remove(currentTheme);
+      body.classList.add(newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    });
 
-function closeModal() {
-  document.getElementById('satanModal').classList.add('is-hidden');
-  document.getElementById('crusoeModal').classList.add('is-hidden');
-}
-
-document.getElementById('themeToggle').addEventListener('click', function() {
-  document.body.classList.toggle('light');
-  this.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
-});
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeModal();
-});
+    // Story modal for future expansion
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.modal-backdrop')) {
+        e.target.closest('.modal').classList.add('is-hidden');
+      }
+    });
   </script>
 </body>
 </html>
